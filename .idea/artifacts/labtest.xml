@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="labtest">
+    <output-path>$PROJECT_DIR$/out/artifacts/labtest</output-path>
+    <root id="archive" name="labtest.jar" />
+  </artifact>
+</component>
