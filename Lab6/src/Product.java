@@ -16,31 +16,31 @@ public class Product {
     }
 
     public boolean isEmpty() {
-        if (stock == 0) return true;
-        else
-            return false;
+        return stock == 0;
     }
 
     /**
      * Return true iff this product has at least n stock
      */
     public boolean has(int n) {
-        if (n <= stock)
-            return true;
-        return false;
+        return n <= stock;
 
-    }
-
-
-    public boolean hasName(String name) {
-        return name.contains(this.name);
     }
 
     /**
      * Sell n stock of this product (decrease stock by n)
      * and return the amount of money earned (price * n)
      */
-    public double sell(int n) {double amountEarned = n * price; if (stock  >= n ) {stock -= n;}return amountEarned;}
+    public double sell(int n) {
+        double total = n * price;
+        if (n<=stock) {
+            stock -= n ;
+        }
+        else {
+            System.out.println("Not enough stock");
+        }
+        return total;
+    }
 
     /**
      * Increase stock by n.

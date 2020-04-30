@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Store {
     private CashRegister cashRegister;
-    private LinkedList<Product> products = new LinkedList<Product>();
+    private LinkedList<Product> products = new LinkedList<>();
 
     public static void main(String[]args) {
         new Store().use();
@@ -38,39 +38,49 @@ public class Store {
     }
 
     private void sell() {
-        String prodName = readName().toLowerCase();
-        System.out.println("Selling " + product(prodName).getName());
-        System.out.print("Number: ");
-        int prodStock = In.nextInt();
+        String name = readName().toLowerCase();
+        int i = 0;
+        int count = 0;
+        for (Product product : products)
+            if (product.getName().toLowerCase().equals(name.toLowerCase())) {
+                System.out.println("Selling " + product.getName());
+                int n = readNumber();
+                double total = product.sell(n);
+                cashRegister.add(total);
 
-        if (!product(prodName).has(prodStock))
-            System.out.println("Not enough stock");
-        double amountSold = product(prodName).sell(prodStock);
-        cashRegister.add(amountSold);
+            } else if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+                if (i == 0)
+                    System.out.println("Multiple products match:");
+
+                System.out.println(product.toString());
+                i++;
+
+            } else
+                count++;
+        if (count == products.size()) {
+            System.out.println("No such product");
+        }
     }
 
     private void restock() {
-        String prodName = readName();
-        System.out.println("Restocking " + product(prodName).getName());
-        System.out.print("Number: ");
-        int prodStock = In.nextInt();
-        product(prodName).restock(prodStock);
+        String name = readName();
+        int count = 0;
+        int i = 0;
 
-
-    }
-
-    private Product product(String name) {
-        for (Product product : products)
-            if (product.hasName(name))
-                return product;
-        return null;
-    }
-
-    private Product product(int n) {
-        for (Product product : products)
-        if (product.has(n))
-            return product;
-        return null;
+        for(Product product : products)
+            if (product.getName().toLowerCase().contains(name.toLowerCase()))
+            {System.out.println("Restocking "+ product.getName());
+                int n = readNumber();
+                product.restock(n);
+            }
+            else
+                count++;
+        if(count == products.size()){
+            System.out.println("Adding new product");
+            int stock = readNumber();
+            double price = readPrice();
+            products.add(new Product(name,stock,price));
+        }
     }
 
     private void viewStock() {
@@ -98,8 +108,7 @@ public class Store {
 
     private String readName() {
         System.out.print("Name: ");
-        String name = In.nextLine();
-        return name;
+        return In.nextLine();
     }
 
     private double readPrice() {
@@ -109,8 +118,7 @@ public class Store {
 
     private int readNumber() {
         System.out.print("Number: ");
-        int amount = In.nextInt();
-        return amount;
+        return In.nextInt();
     }
 
     private void help() {
