@@ -26,7 +26,6 @@ public class Product {
         return n <= stock;
 
     }
-
     /**
      * Sell n stock of this product (decrease stock by n)
      * and return the amount of money earned (price * n)
