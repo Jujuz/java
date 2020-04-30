@@ -18,6 +18,7 @@ public class Product {
     public boolean isEmpty() {
         return stock == 0;
     }
+
     /**
      * Return true iff this product has at least n stock
      */
@@ -25,6 +26,8 @@ public class Product {
         return n <= stock;
 
     }
+
+    // Cool comment
     /**
      * Sell n stock of this product (decrease stock by n)
      * and return the amount of money earned (price * n)
