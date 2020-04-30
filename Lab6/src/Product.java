@@ -18,7 +18,6 @@ public class Product {
     public boolean isEmpty() {
         return stock == 0;
     }
-
     /**
      * Return true iff this product has at least n stock
      */
